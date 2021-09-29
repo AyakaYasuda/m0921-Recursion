@@ -36,6 +36,7 @@ function productOfArray(array) {
 }
 
 console.log(productOfArray([1, 2, 3, 10, 11]));
+console.log('------------------------------')
 
 // productOfArray([1, 2, 3, 10]) : 10 * productOfArray([1, 2, 3])
 // productOfArray([1, 2, 3]) : 3 * productOfArray([1, 2])
@@ -43,6 +44,24 @@ console.log(productOfArray([1, 2, 3, 10, 11]));
 // => 2 * 1 = 2
 // => 2 * 3 = 6
 // => 6 * 10 = 60
+
+/*
+another solution
+*/
+
+function productOfArray2(array) {
+  if (array.length === 0) return 1;
+  return array[0] * productOfArray2(array.slice(1));
+}
+
+console.log(productOfArray2([1, 2, 3, 10, 11]));
+
+// productOfArray([1, 2, 3, 10])
+// => [1] * productOfArray([2, 3, 10])
+// => [1] * [2] * productOfArray([3, 10])
+// => [1] * [2] * [3] * productOfArray([10])
+// => [1] * [2] * [3] * [10] * productOfArray([])
+// => [1] * [2] * [3] * [10] * 1
 
 /* 03-----------------------reverse---------------------------------------------------------------------
 Write a recursive function called 'reverse' which accepts a string and returns 
@@ -63,12 +82,24 @@ function reverse(str) {
 }
 console.log(reverse('awesome'));
 console.log(reverse('rithmschool'));
+console.log('------------------------------')
 
 // 'map' => 'pam'
 // reverse('map') : p + reverse('ma')
 // reverse('ma') : a + reverse('m')
 // => reverse('m') = strArray.join('')
 // => strArray.join('') + strArray.pop()
+
+/*
+another solution
+*/
+
+function reverse2(str) {
+  if (str.length === 1) return str;
+  return reverse2(str.slice(1)) + str[0];
+}
+console.log(reverse2('awesome'));
+console.log(reverse2('rithmschool'));
 
 /* 04-----------------------isPalindrome---------------------------------------------------------------------
 Write a recursive function called 'isPalindrome' which returns true if the string 
@@ -86,9 +117,28 @@ function isPalindrome(str) {
   return str === reverse(str);
 }
 
-console.log(isPalindrome('awesome')); 
-console.log(isPalindrome('foobar')); 
+console.log(isPalindrome('awesome'));
+console.log(isPalindrome('foobar'));
 console.log(isPalindrome('tacocat'));
-console.log(isPalindrome('amanaplanacanalpanama')); 
+console.log(isPalindrome('amanaplanacanalpanama'));
 console.log(isPalindrome('amanaplanacanalpandemonium'));
+console.log('------------------------------')
 
+/*
+another solution
+*/
+
+function isPalindrome2(str) {
+  // base case
+  if (str.length === 1) return true;
+  if (str.length === 2) return str[0] === str[1];
+  if (str[0] === str.slice(-1)) return isPalindrome2(str.slice(1, -1));
+
+  return false;
+}
+
+console.log(isPalindrome2('awesome'));
+console.log(isPalindrome2('foobar'));
+console.log(isPalindrome2('tacocat'));
+console.log(isPalindrome2('amanaplanacanalpanama'));
+console.log(isPalindrome2('amanaplanacanalpandemonium'));
